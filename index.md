@@ -1,37 +1,169 @@
-## Welcome to GitHub Pages
+<!-- original : https://codepen.io/SeanNorton/pen/LWBXQL -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-You can use the [editor on GitHub](https://github.com/starlynnbee/greet/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+    <style>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+        /*CSS RESETS*/
 
-### Markdown
+body{
+    background-color: #fff;
+    line-height: 1.6;
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+}
 
-```markdown
-Syntax highlighted code block
+h1 {
+    margin-top: 0;
+}
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+/*CSS START*/
 
-1. Numbered
-2. List
+.full-table {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
 
-**Bold** and _Italic_ and `Code` text
+.table-cell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
 
-[Link](url) and ![Image](src)
-```
+.card {
+    padding: 10px 25px 10px 25px;
+    border-radius: 10px;
+    background: #ffb6c1;
+    color: #fff;
+    display: inline-block;
+    box-shadow: 2px 2px 1px 0px #295C7B;
+}
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+.card:hover {
+    margin-top: 2px;
+    box-shadow: none;
+}
 
-### Jekyll Themes
+.clock {
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    /* padding-left: 20px; */
+}
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/starlynnbee/greet/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+.time {
+    display: inline-block;
+    min-width: 37px;
+}
 
-### Support or Contact
+.colon {
+    font-size: 1.1em;
+    display: inline-block;
+}
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+.date {
+    display: block;
+    min-width: 162px;
+    /* padding-right: 30px; */
+    /* border-right: 2px solid #295C7B; */
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+}
+.greet{
+
+    min-width: 162px;
+    /* padding-right: 30px; */
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+}
+
+    </style>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto:400,700" rel="stylesheet">
+
+<div class="full-table">
+  <div class="table-cell">
+
+    <div class="card">
+        <div class="greet" id="greet"></div>
+      <div class="date" id="date"></div>
+      <div class="clock">
+        <div class="time" id="hour"></div>
+        <div class="colon">:</div>
+        <div class="time" id="min"></div>
+        <div class="colon">:</div>
+        <div class="time" id="sec"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+    function date() {
+var today = new Date();
+document.getElementById('date').innerHTML = today.toDateString();
+}
+
+
+function clock() {
+var today = new Date();
+var hour = zeros(twelveHour(today.getHours()));
+var minutes = zeros(today.getMinutes());
+var seconds = zeros(today.getSeconds());
+if(today.getHours() >=12){
+    seconds+=" pm"
+}
+else{
+    seconds+=" am"
+}
+hrs = today.getHours();
+if (hrs < 12)
+        greet = 'Good Morning  ';
+    else if (hrs >= 12 && hrs <= 17)
+        greet = 'Good Afternoon ';
+    else if (hrs >= 17 && hrs <= 24)
+        greet = 'Good Evening  ';
+// console.log(today.toLocaleTimeString());
+document.getElementById('greet').innerHTML = greet;
+document.getElementById('hour').innerHTML = hour;
+document.getElementById('min').innerHTML = minutes;
+document.getElementById('sec').innerHTML = seconds;
+}
+
+function twelveHour(hour) {
+if (hour > 12) {
+    return hour -= 12 
+} else if (hour === 0) {
+    return hour = 12;
+} else {
+    return hour
+}
+}
+// adds zero infront of single digit number
+function zeros(num) {
+if (num < 10) {
+    num = '0' + num
+};
+return num;
+}
+
+function dateTime() {
+date();
+clock();
+setTimeout(dateTime, 500);
+}
+
+dateTime()
+// END
+</script>
+
+</body>
+</html>
